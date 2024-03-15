@@ -1,0 +1,19 @@
+{% extends 'app17/base.html' %}
+
+{% block title %}Settings{% endblock %}
+
+{% block content %}
+    <div class="settings">
+        <div class="s_container container">
+            <div class="s_block">
+                <form method="POST">
+                    {% csrf_token %}
+                        {{ form.as_p }}
+
+                        <input type="submit" value="Применить" class="confrim">
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

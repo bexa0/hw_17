@@ -1,0 +1,38 @@
+{% extends 'app17/base.html' %}
+
+{% block title %}Task Detail{% endblock %}
+
+{% block content %}
+
+    <div class="task_detail">
+        <div class="td_container container">
+            <div class="td_body">
+                <div class="td_title tdd">Title: <p>{{ task }}</p></div>
+                <div class="td_description tdd">Description: <div class="td_dd">{{ task.description }}</div></div>
+                <div class="td_priority tdd" >Priority: <p style="width: 40px; height: 40px; -webkit-border-radius: 40px;-moz-border-radius: 40px;border-radius: 40px; background: {% if task.priority == '1' %}
+                                red
+                                {% elif task.priority == '2' %}
+                                yellow
+                                {% elif task.priority == '3' %}
+                                blue
+                                {% endif %} ;"></p></div>
+                <div class="td_created_at tdd">Created at: <p>{{ task.created_at|date:"Y-m-d" }} {{ task.created_at|time:'H:i' }}</p></div>
+                <div class="td_deadline tdd">Deadline: <p>{{ task.deadline|date:'Y-m-d' }} 00:00:00</p></div>
+                <div class="td_status tdd">Status: <p>{{ task.status }}</p></div>
+                <div class="td_image tdd">Image: <a href="{{ task.image.url }}" target="_blank">watch here</a></div>
+                <div class="td_btns tdd">
+                    {% if task.status == 'in process' %}
+                        <a href="{% url 'task_update' task.pk%}">Update</a>
+                        <a href="{%url 'task_list'%}">Back</a>
+                    {% else %}
+                        <a href="{%url 'task_history'%}">Back</a>
+
+                    {% endif %}
+                    <a href="{% url 'task_delete' task.pk %}">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

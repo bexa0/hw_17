@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style2.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body class="black">
+    <div class="header">
+        <div class="header_container container">
+            <div class="header_logo">Task Manager</div>
+            <div class="header_navbar">
+                {%if request.build_absolute_uri != 'http://127.0.0.1:8000/' %}
+                    <a href="{% url 'task_list' %}">Tasks</a>
+                {% endif %}
+                <a href="{% url 'task_create' %}">Create</a>
+                <a href="{% url 'task_history' %}">History</a>
+                <a href="{% url 'settings' %}">Settings</a>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+    <script src="{% static 'main.js' %}"></script>
+
+</body>
+</html>

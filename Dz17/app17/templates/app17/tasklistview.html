@@ -1,0 +1,39 @@
+{% extends 'app17/base.html' %}
+
+{% block title %}Task List View{% endblock %}
+
+{% block content %}
+
+
+    <div class="task_list">
+        <div class="task_list_container container">
+            {% for task in task_list %}
+                <div class="tl_block">
+                    <div class="tl_title" style="display: flex; justify-content:center; align-items:center;grid-gap: 10px">
+                        <div class="ttttitle">{{task.title}}</div>
+                        <div class="crug" style="background-color:
+                              {% if task.priority == '1' %}
+                                red
+                                {% elif task.priority == '2' %}
+                                yellow
+                                {% elif task.priority == '3' %}
+                                blue
+                                {% endif %}
+                        ; width: 40px;height: 40px;-webkit-border-radius: 50px;-moz-border-radius: 50px;border-radius: 50px;"></div>
+                    </div>
+                        <div class="tl_block_bg_img"><img src="{{ task.image.url }}" ></div>
+                    <div class="tl_other_btns">
+                        <p style="color:black; text-shadow: 0  0 10px #000;">Deadline: {{ task.deadline|date:"Y:m:d" }}</p>
+                        <p style="color:black; text-shadow: 0  0 10px #000;">{{ task.deadline|time:"H:i:s" }}</p>
+                        <a href="{% url 'completed' task.pk %}">Completed</a>
+                        <a href="{% url 'task_detail' task.pk %}">Detail</a>
+                        <a href="{% url 'task_update' task.pk %}">Update</a>
+                        <a href="{% url 'task_delete' task.pk %}" id="delete">Delete</a>
+                    </div>
+                </div>
+        {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}

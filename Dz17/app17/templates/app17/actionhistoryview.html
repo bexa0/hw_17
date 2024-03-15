@@ -1,0 +1,17 @@
+{% extends 'app17/base.html' %}
+
+{% block title %}Action History{% endblock %}
+
+{% block content %}
+    <div class="action">
+        <div class="a_container container">
+            <div class="action_block">
+                {% for action in action_list %}
+                    <div>{{ action.title }} - {{ action.action }} - {{ action.made_at|date:'Y.m.d' }} {{ action.made_at|time:'H:i:s' }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

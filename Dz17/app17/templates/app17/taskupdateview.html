@@ -1,0 +1,62 @@
+{% extends 'app17/base.html' %}
+
+{% block title %}Task Update{% endblock %}
+
+{% block content %}
+
+
+    <div class="create">
+        <div class="create_container container">
+            <div class="create_block">
+                <form method="POST" enctype="multipart/form-data" class="create_form">
+                {%csrf_token%}
+                    <div class="form_body">
+                        <div class="form_rf">
+                            <div class="form_left">
+                                <div class="form_e focus">
+                                    <div class="lab">
+                                        {{ form.title.label_tag }}
+                                    </div>
+                                    {{ form.title }}
+                                </div>
+                                <div class="form_e focus">
+                                    <div class="lab">
+                                        {{ form.priority.label_tag }}
+                                    </div>
+                                    {{ form.priority }}
+                                    {{ form.image.label_tag }}
+                                    {{ form.image }}
+                                </div>
+                                <div class="form_e focus">
+                                    <div class="lab">
+                                        {{ form.deadline.label_tag }}
+                                    </div>
+                                    {{ form.deadline }}
+                                    {% if form.initial.deadline %}
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function() {
+                                                document.getElementById("id_deadline").value = "{{ form.initial.deadline|date:'Y-m-d' }}";
+                                            });
+                                        </script>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                            <div class="form_right">
+                                {{ form.description }}
+                            </div>
+                        </div>
+
+                    </div>
+                <input type="submit" value="Create" class="create">
+                </form>
+
+                <div class="create_ui">
+                    <a href="{% url 'task_list' %}">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
